@@ -11,11 +11,11 @@ The idea behind the Java *XMLMap* API is simple: parse any XML to a Map.
 
 Imagine a simple XML:
 
-	<value>123</value>
+	<tt><value>123</value></tt>
 
 You can easily imagine that being mapped to the Map:
 
-	{ value = 123 }
+	<tt>{ value = 123 }</tt>
 
 But, there is some complex cases like:
 
