@@ -3,7 +3,9 @@
 Simple Java conversion XML to Map.
 
 
-== Concept
+== Using
+
+=== Concept
 
 The idea behind the Java *XMLMap* API is simple: parse any XML to a Map.
 
