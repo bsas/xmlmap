@@ -13,7 +13,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.apache.camel.Converter;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -35,14 +34,8 @@ import org.xml.sax.SAXException;
  * 
  * @author Bernardo Silva (bernardo.silva@gmail.com)
  */
-@Converter
 public final class XMLToMapConverter {
 	private XMLToMapConverter() {
-	}
-
-	@Converter
-	public static Map<String, Object> fromInputStream(InputStream inputStream) throws ParserConfigurationException, SAXException, IOException {
-		return fromInputStream(inputStream, true);
 	}
 
 	public static Map<String, Object> fromInputStream(InputStream inputStream, boolean addAttributes) throws ParserConfigurationException, SAXException, IOException {
@@ -52,27 +45,12 @@ public final class XMLToMapConverter {
 		return fromDocumentToMap(doc, addAttributes);
 	}
 
-	@Converter
-	public static Map<String, Object> fromDocumentToMap(Document doc) {
-		return fromDocumentToMap(doc, true);
-	}
-
 	public static Map<String, Object> fromDocumentToMap(Document doc, boolean addAttributes) {
 		return fromNodeListToMap(doc.getChildNodes(), addAttributes);
 	}
 
-	@Converter
-	public static Map<String, Object> fromXMLToMap(String xml) throws ParserConfigurationException, SAXException, IOException {
-		return fromXMLToMap(xml, true);
-	}
-
 	public static Map<String, Object> fromXMLToMap(String xml, boolean addAttributes) throws ParserConfigurationException, SAXException, IOException {
 		return fromInputStream(new ByteArrayInputStream(xml.getBytes()), addAttributes);
-	}
-
-	@Converter
-	public static Map<String, Object> fromNodeListToMap(NodeList nodeList) {
-		return fromNodeListToMap(nodeList, true);
 	}
 
 	public static Map<String, Object> fromNodeListToMap(NodeList nodeList, boolean addAttributes) {
