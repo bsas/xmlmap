@@ -3,11 +3,10 @@
 Simple Java conversion XML to Map.
 
 
-== Using
-
-=== Concept
+==  Concept
 
 The idea behind the Java *XMLMap* API is simple: parse any XML to a Map.
+
 
 Imagine a simple XML:
 
@@ -16,6 +15,7 @@ Imagine a simple XML:
 You can easily imagine that being mapped to the Map:
 
 	{ value = 123 }
+
 
 But, there is some complex cases like:
 
@@ -31,6 +31,7 @@ But, you can also imagine some simple correlations:
    b) If the element is a complex type, the key becomes @<attribute-name> inside the element Map;
 3. The value becomes a List;
 4. The namespaces are treated like attributes and element names.
+
 
 So, this complex XML:
 
@@ -67,15 +68,18 @@ Becomes this:
 
 All real values becomes String. So, you never face conversion issues.
 
+
 This approach helps using script languages, like Scala or Groovy, because you can easily do:
 
 	def firstHotelName = map['soap:Envelope']['soap:Body']['hotel'][0]['name']
+
 
 This approach is also useful on Apache Camel, where you can easily use any scripting language to
 parse the body of the message, if that message is a map.
 
 This is an example using "simple":
 
+	<convertBodyTo type="java.util.Map" />
 	<setBody>
 		<simple>${body[soap:Envelope][soap:Body]}</simple>
 	</setBody>
