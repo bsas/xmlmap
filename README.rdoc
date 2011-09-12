@@ -2,29 +2,31 @@
 
 == Concept
 
-The idea behind the Java *XMLMap* API is simple: parse any XML to a Map.
+	The idea behind the Java *XMLMap* API is simple: parse any XML to a Map.
 
-Imagine a simple XML:
-<value>123<value>
+	Imagine a simple XML:
 
-You can easily imagine that being mapped to the Map:
+<value>123</value>
+
+	You can easily imagine that being mapped to the Map:
+
 { value = 123 }
 
-But, there is some complex cases like:
+	But, there is some complex cases like:
 
-1. Complex types;
-2. Attributes;
-3. Element repetition (lists);
-4. Namespaces.
+	1. Complex types;
+	2. Attributes;
+	3. Element repetition (lists);
+	4. Namespaces.
 
-But, you can also imagine some simple correlations:
+	But, you can also imagine some simple correlations:
 
-1. The value becomes another Map;
-2. The key becomes <element-name>@<attribute-name>;
-3. The value becomes a List;
-4. The namespaces are treated like attributes and element names.
+	1. The value becomes another Map;
+	2. The key becomes <element-name>@<attribute-name>;
+	3. The value becomes a List;
+	4. The namespaces are treated like attributes and element names.
 
-So, this complex XML:
+	So, this complex XML:
 
 <tt>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -39,7 +41,7 @@ So, this complex XML:
 <soap:Envelope>
 </tt>
 
-Becomes this:
+	Becomes this:
 
 <tt>
 {
