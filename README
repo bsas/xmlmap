@@ -11,7 +11,7 @@ The idea behind the Java *XMLMap* API is simple: parse any XML to a Map.
 
 Imagine a simple XML:
 
-	<value>123</value></tt>
+	<value>123</value>
 
 You can easily imagine that being mapped to the Map:
 
@@ -60,3 +60,14 @@ Becomes this:
 			}
 		}
 	}
+
+All real values becomes String. So, you never face conversion issues.
+
+This approach is useful on Apache Camel, where you can easily use any scripting language to
+parse the body of the message, if that message is a map.
+
+This is an example using "simple":
+
+	<setBody>
+		<simple>${body[soap:Envelope][soap:Body]}</simple>
+	</setBody>
