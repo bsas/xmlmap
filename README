@@ -27,7 +27,8 @@ But, there is some complex cases like:
 But, you can also imagine some simple correlations:
 
 1. The value becomes another Map;
-2. The key becomes <element-name>@<attribute-name>;
+2. a) If the element is a simple value, the key becomes <element-name>@<attribute-name> in the same Map;
+   b) If the element is a complex type, the key becomes @<attribute-name> inside the element Map;
 3. The value becomes a List;
 4. The namespaces are treated like attributes and element names.
 
