@@ -19,7 +19,8 @@
 	<description>Simple Java conversion XML to Map.</description>
 	<url>https://github.com/bsas/xmlmap</url>
 	<scm>
-		<url>git://github.com/bsas/xmlmap.git</url>
+		<connection>scm:git:git://github.com/bsas/xmlmap.git</connection>
+		<url>scm:git:git://github.com/bsas/xmlmap.git</url>
 		<developerConnection>bernardo.silva@gmail.com</developerConnection>
 	</scm>
 	<organization>
@@ -61,6 +62,7 @@
 
 	<build>
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -86,6 +88,12 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+			</plugin>
+
 		</plugins>
 	</build>
 
