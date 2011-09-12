@@ -36,7 +36,7 @@ So, this complex XML:
 	<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 		<soap:Body>
 			<hotel id="1">
-				<name>Hyatt</name>
+				<name code="HYT">Hyatt</name>
 			</hotel>
 			<hotel id="2">
 				<name>Ibis</name>
@@ -51,12 +51,15 @@ Becomes this:
 		soap:Envelope = {
 			soap:Body = {
 				hotel = [
-					{ name = Hyatt },
-					{ name = Ibis }
+					{
+						@id = 1
+						name = Hyatt
+						name@code = HYT
+					}, {
+						@id = 2
+						name = Ibis 
+					}
 				]
-				hotel@id = [
-					1, 2
-				}
 			}
 		}
 	}

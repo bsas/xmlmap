@@ -77,27 +77,44 @@ public final class XMLToMapConverter {
 
 	public static Map<String, Object> fromNodeListToMap(NodeList nodeList, boolean addAttributes) {
 		final Map<String, Object> map = new HashMap<String, Object>();
-		for (int i = 0; i < nodeList.getLength(); i++) {
+		for (int i=0; i<nodeList.getLength(); i++) {
 			final Node node = nodeList.item(i);
 			final String nodeName = node.getNodeName();
+
+			Object value = null;
 			if (node.hasChildNodes()) {
 				final NodeList childNodeList = node.getChildNodes();
 				if (childNodeList.getLength() == 1 && childNodeList.item(0).getNodeType() == Node.TEXT_NODE) {
-					addValueToMap(nodeName, childNodeList.item(0).getNodeValue(), map);
+					value = childNodeList.item(0).getNodeValue();
 				} else {
-					addValueToMap(nodeName, fromNodeListToMap(childNodeList, addAttributes), map);
+					value = fromNodeListToMap(childNodeList, addAttributes);
 				}
 			}
-			if (addAttributes && node.hasAttributes()) {
-				final NamedNodeMap attributes = node.getAttributes();
-				for (int j = 0; j < attributes.getLength(); j++) {
-					final String attributeName = attributes.item(j).getNodeName();
-					final String attributeValue = attributes.item(j).getNodeValue();
+			if (value != null) {
+				addValueToMap(nodeName, value, map);
+			}
+
+			if (addAttributes) {
+				fromAttributesToMap(node, nodeName, map, value);
+			}
+		}
+		return map;
+	}
+
+	@SuppressWarnings("unchecked")
+	private static void fromAttributesToMap(Node node, String nodeName, Map<String, Object> map, Object value) {
+		if (node.hasAttributes()) {
+			final NamedNodeMap attributes = node.getAttributes();
+			for (int j=0; j<attributes.getLength(); j++) {
+				final String attributeName = attributes.item(j).getNodeName();
+				final String attributeValue = attributes.item(j).getNodeValue();
+				if (value instanceof Map) {
+					addValueToMap('@' + attributeName, attributeValue, (Map<String, Object>) value);
+				} else {
 					addValueToMap(nodeName + '@' + attributeName, attributeValue, map);
 				}
 			}
 		}
-		return map;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
