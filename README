@@ -48,17 +48,17 @@ So, this complex XML:
 Becomes this:
 
 	{
-		soap:Envelope@xmlns:soap = http://schemas.xmlsoap.org/soap/envelope/
-		soap:Envelope = {
+		soap:Envelope = { 
+			@xmlns:soap = http://schemas.xmlsoap.org/soap/envelope/,
 			soap:Body = {
-				hotel = [
+				hotel=[
 					{
+						name@code = HYT, 
+						name = Hyatt, 
 						@id = 1
-						name = Hyatt
-						name@code = HYT
 					}, {
+						name = Ibis,
 						@id = 2
-						name = Ibis 
 					}
 				]
 			}
