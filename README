@@ -51,7 +51,7 @@ Becomes this:
 		soap:Envelope = { 
 			@xmlns:soap = http://schemas.xmlsoap.org/soap/envelope/,
 			soap:Body = {
-				hotel=[
+				hotel = [
 					{
 						name@code = HYT, 
 						name = Hyatt, 
@@ -67,7 +67,11 @@ Becomes this:
 
 All real values becomes String. So, you never face conversion issues.
 
-This approach is useful on Apache Camel, where you can easily use any scripting language to
+This approach helps using script languages, like Scala or Groovy, because you can easily do:
+
+	def firstHotelName = map['soap:Envelope']['soap:Body']['hotel'][0]['name']
+
+This approach is also useful on Apache Camel, where you can easily use any scripting language to
 parse the body of the message, if that message is a map.
 
 This is an example using "simple":
