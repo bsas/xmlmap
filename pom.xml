@@ -14,14 +14,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bsas</groupId>
 	<artifactId>xmlmap</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>XMLMap</name>
 	<description>Simple Java conversion XML to Map.</description>
 	<url>https://github.com/bsas/xmlmap</url>
 	<scm>
-		<connection>scm:git:git://github.com/bsas/xmlmap.git</connection>
-		<url>scm:git:git://github.com/bsas/xmlmap.git</url>
-		<developerConnection>bernardo.silva@gmail.com</developerConnection>
+		<connection>scm:git:git@github.com:bsas/xmlmap.git</connection>
+		<url>scm:git:git@github.com:bsas/xmlmap.git</url>
+		<developerConnection>scm:git:git@github.com:bsas/xmlmap.git</developerConnection>
 	</scm>
 	<organization>
 		<name>Bernardo Silva</name>
