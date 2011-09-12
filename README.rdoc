@@ -1,0 +1,53 @@
+= Java *XMLMap*
+
+== Concept
+
+The idea behind the Java *XMLMap* API is simple: parse any XML to a Map.
+
+Imagine a simple XML:
+<value>123<value>
+
+You can easily imagine that being mapped to the Map:
+{ value = 123 }
+
+But, there is some complex cases like:
+
+- Complex types;
+- Attributes;
+- Element repetition (lists);
+- Namespaces.
+
+But, you can also imagine some simple correlations:
+
+- The value becomes another Map;
+- The key becomes <element-name>@<attribute-name>;
+- The value becomes a List;
+- The namespaces are treated like attributes and element names.
+
+So, this complex XML:
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+	  <hotel id="1">
+	     <name>Hyatt</name>
+	  </hotel>
+	  <hotel id="2">
+	     <name>Ibis</name>
+	  </hotel>
+  </soap:Body>
+<soap:Envelope>
+
+Becomes this:
+{
+	soap:Envelope@xmlns:soap = http://schemas.xmlsoap.org/soap/envelope/
+	soap:Envelope = {
+		soap:Body = {
+			hotel = [
+				{ name = Hyatt },
+				{ name = Ibis }
+			]
+			hotel@id = [
+				1, 2
+			}
+		}
+	}
+}
