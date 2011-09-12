@@ -12,19 +12,21 @@ You can easily imagine that being mapped to the Map:
 
 But, there is some complex cases like:
 
-- Complex types;
-- Attributes;
-- Element repetition (lists);
-- Namespaces.
+1. Complex types;
+2. Attributes;
+3. Element repetition (lists);
+4. Namespaces.
 
 But, you can also imagine some simple correlations:
 
-- The value becomes another Map;
-- The key becomes <element-name>@<attribute-name>;
-- The value becomes a List;
-- The namespaces are treated like attributes and element names.
+1. The value becomes another Map;
+2. The key becomes <element-name>@<attribute-name>;
+3. The value becomes a List;
+4. The namespaces are treated like attributes and element names.
 
 So, this complex XML:
+
+<tt>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
 	  <hotel id="1">
@@ -35,8 +37,11 @@ So, this complex XML:
 	  </hotel>
   </soap:Body>
 <soap:Envelope>
+</tt>
 
 Becomes this:
+
+<tt>
 {
 	soap:Envelope@xmlns:soap = http://schemas.xmlsoap.org/soap/envelope/
 	soap:Envelope = {
@@ -51,3 +56,4 @@ Becomes this:
 		}
 	}
 }
+</tt>
