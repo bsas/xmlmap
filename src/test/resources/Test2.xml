@@ -1,0 +1,10 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<hotel id="1">
+			<name>Hyatt</name>
+		</hotel>
+		<hotel id="2">
+			<name>Ibis</name>
+		</hotel>
+	</soap:Body>
+</soap:Envelope>

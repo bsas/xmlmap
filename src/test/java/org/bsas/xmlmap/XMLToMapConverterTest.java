@@ -12,4 +12,10 @@ public class XMLToMapConverterTest {
 		System.out.println(map);
 	}
 
+	@Test
+	public void testComplexFile() throws Exception {
+		Map<?, ?> map = XMLToMapConverter.fromInputStream(XMLToMapConverter.class.getResourceAsStream("/Test2.xml"));
+		System.out.println(map);
+	}
+
 }
