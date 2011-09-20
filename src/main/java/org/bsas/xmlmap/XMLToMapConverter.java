@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +54,7 @@ public final class XMLToMapConverter {
 	}
 
 	public static Map<String, Object> fromNodeListToMap(NodeList nodeList, boolean addAttributes) {
-		final Map<String, Object> map = new HashMap<String, Object>();
+		final Map<String, Object> map = new LinkedHashMap<String, Object>();
 		for (int i=0; i<nodeList.getLength(); i++) {
 			final Node node = nodeList.item(i);
 			final String nodeName = node.getNodeName();
