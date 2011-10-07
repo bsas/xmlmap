@@ -81,16 +81,17 @@ public final class XMLToMapConverter {
 
 	@SuppressWarnings("unchecked")
 	private static void fromAttributesToMap(Node node, String nodeName, Map<String, Object> map, Object value) {
+		Object obj = value;
 		if (node.hasAttributes()) {
 			final NamedNodeMap attributes = node.getAttributes();
 			for (int j=0; j<attributes.getLength(); j++) {
 				final String attributeName = attributes.item(j).getNodeName();
 				final String attributeValue = attributes.item(j).getNodeValue();
-				if (value instanceof Map) {
-					addValueToMap('@' + attributeName, attributeValue, (Map<String, Object>) value);
-				} else {
-					addValueToMap(nodeName + '@' + attributeName, attributeValue, map);
+				if (!(obj instanceof Map)) {
+					obj = new LinkedHashMap<String, Object>();
+					addValueToMap(nodeName, obj, map);
 				}
+				addValueToMap('@' + attributeName, attributeValue, (Map<String, Object>) obj);
 			}
 		}
 	}

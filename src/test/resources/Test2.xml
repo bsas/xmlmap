@@ -6,5 +6,6 @@
 		<hotel id="2">
 			<name>Ibis</name>
 		</hotel>
+		<check test="true">OK</check>
 	</soap:Body>
 </soap:Envelope>

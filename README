@@ -27,8 +27,7 @@ But, there is some complex cases like:
 But, you can also imagine some simple correlations:
 
 1. The value becomes another Map;
-2. a) If the element is a simple value, the key becomes <element-name>@<attribute-name> in the same Map;
-   b) If the element is a complex type, the key becomes @<attribute-name> inside the element Map;
+2. The key for attributes becomes @<attribute-name> inside the element Map;
 3. The value becomes a List;
 4. The namespaces are treated like attributes and element names.
 
@@ -43,28 +42,29 @@ So, this complex XML:
 			<hotel id="2">
 				<name>Ibis</name>
 			</hotel>
+			<check test="true">OK</check>
 		</soap:Body>
 	</soap:Envelope>
 
 Becomes this:
 
 	{
-		soap:Envelope = { 
-			@xmlns:soap = http://schemas.xmlsoap.org/soap/envelope/,
-			soap:Body = {
-				hotel = [
-					{
-						name@code = HYT, 
-						name = Hyatt, 
-						@id = 1
-					}, {
-						name = Ibis,
-						@id = 2
-					}
-				]
-			}
+		soap:Envelope={
+			soap:Body={
+				hotel=[
+					{name=
+						[	Hyatt,
+							{@code=HYT} ],
+						@id=1},
+					{name=
+						Ibis, 
+						@id=2}
+				],
+				check=[OK, {@test=true}]}, 
+				@xmlns:soap=http://schemas.xmlsoap.org/soap/envelope/
 		}
 	}
+
 
 All real values becomes String. So, you never face conversion issues.
 
