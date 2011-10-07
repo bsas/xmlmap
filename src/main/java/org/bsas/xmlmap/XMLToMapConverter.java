@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +20,8 @@ import org.xml.sax.SAXException;
 
 /**
  * <p>
- * <b>XMLToMapConverter</b> is a utility class that converts any XML to a simple
- * Map<String, Object> type.
+ * <b>XMLToMapConverter</b> is a utility class that converts any XML to
+ * XMLLinkedHashMap type.
  * </p>
  * <p>
  * The idea is to easily parse and extract simple information, avoiding the
@@ -35,26 +34,27 @@ import org.xml.sax.SAXException;
  * @author Bernardo Silva (bernardo.silva@gmail.com)
  */
 public final class XMLToMapConverter {
+
 	private XMLToMapConverter() {
 	}
 
-	public static Map<String, Object> fromInputStream(InputStream inputStream, boolean addAttributes) throws ParserConfigurationException, SAXException, IOException {
+	public static XMLLinkedHashMap fromInputStream(InputStream inputStream, boolean addAttributes) throws ParserConfigurationException, SAXException, IOException {
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		final DocumentBuilder builder = factory.newDocumentBuilder();
 		final Document doc = builder.parse(inputStream);
 		return fromDocumentToMap(doc, addAttributes);
 	}
 
-	public static Map<String, Object> fromDocumentToMap(Document doc, boolean addAttributes) {
+	public static XMLLinkedHashMap fromDocumentToMap(Document doc, boolean addAttributes) {
 		return fromNodeListToMap(doc.getChildNodes(), addAttributes);
 	}
 
-	public static Map<String, Object> fromXMLToMap(String xml, boolean addAttributes) throws ParserConfigurationException, SAXException, IOException {
+	public static XMLLinkedHashMap fromXMLToMap(String xml, boolean addAttributes) throws ParserConfigurationException, SAXException, IOException {
 		return fromInputStream(new ByteArrayInputStream(xml.getBytes()), addAttributes);
 	}
 
-	public static Map<String, Object> fromNodeListToMap(NodeList nodeList, boolean addAttributes) {
-		final Map<String, Object> map = new LinkedHashMap<String, Object>();
+	public static XMLLinkedHashMap fromNodeListToMap(NodeList nodeList, boolean addAttributes) {
+		final XMLLinkedHashMap map = new XMLLinkedHashMap();
 		for (int i=0; i<nodeList.getLength(); i++) {
 			final Node node = nodeList.item(i);
 			final String nodeName = node.getNodeName();
@@ -79,8 +79,7 @@ public final class XMLToMapConverter {
 		return map;
 	}
 
-	@SuppressWarnings("unchecked")
-	private static void fromAttributesToMap(Node node, String nodeName, Map<String, Object> map, Object value) {
+	private static void fromAttributesToMap(Node node, String nodeName, XMLLinkedHashMap map, Object value) {
 		Object obj = value;
 		if (node.hasAttributes()) {
 			final NamedNodeMap attributes = node.getAttributes();
@@ -88,16 +87,16 @@ public final class XMLToMapConverter {
 				final String attributeName = attributes.item(j).getNodeName();
 				final String attributeValue = attributes.item(j).getNodeValue();
 				if (!(obj instanceof Map)) {
-					obj = new LinkedHashMap<String, Object>();
+					obj = new XMLLinkedHashMap();
 					addValueToMap(nodeName, obj, map);
 				}
-				addValueToMap('@' + attributeName, attributeValue, (Map<String, Object>) obj);
+				addValueToMap('@' + attributeName, attributeValue, (XMLLinkedHashMap) obj);
 			}
 		}
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static void addValueToMap(String nodeName, Object nodeValue, Map<String, Object> map) {
+	private static void addValueToMap(String nodeName, Object nodeValue, XMLLinkedHashMap map) {
 		if (map.containsKey(nodeName)) {
 			final Object oldValue = map.get(nodeName);
 			if (oldValue instanceof List) {
